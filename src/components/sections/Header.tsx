@@ -212,13 +212,18 @@ const Header: React.FC = () => {
           </motion.button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-8">
             {/* Core Navigation Items */}
             {coreNavItems.map((item, index) => (
               <motion.button
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className="text-gray-300 hover:text-neon-green transition-colors duration-200 font-medium"
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  console.log('Navigation clicked:', item.name)
+                  scrollToSection(item.href)
+                }}
+                className="text-gray-300 hover:text-neon-green transition-colors duration-200 font-medium px-2 py-1"
                 whileHover={{ y: -2 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -231,8 +236,13 @@ const Header: React.FC = () => {
             {/* More Dropdown */}
             <div className="relative">
               <motion.button
-                onClick={() => setIsNavigationOpen(!isNavigationOpen)}
-                className="flex items-center gap-1 text-gray-300 hover:text-neon-green transition-colors duration-200 font-medium"
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  console.log('More dropdown clicked')
+                  setIsNavigationOpen(!isNavigationOpen)
+                }}
+                className="flex items-center gap-1 text-gray-300 hover:text-neon-green transition-colors duration-200 font-medium px-2 py-1"
                 whileHover={{ y: -2 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -246,6 +256,7 @@ const Header: React.FC = () => {
               <AnimatePresence>
                 {isNavigationOpen && (
                   <motion.div
+                    onClick={(e) => e.stopPropagation()}
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -272,7 +283,12 @@ const Header: React.FC = () => {
                             {categoryItems.map((item, index) => (
                               <motion.button
                                 key={item.name}
-                                onClick={() => scrollToSection(item.href)}
+                                onClick={(e) => {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  console.log('Dropdown item clicked:', item.name)
+                                  scrollToSection(item.href)
+                                }}
                                 className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-white/5 transition-all duration-200 group"
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -303,8 +319,13 @@ const Header: React.FC = () => {
 
             {/* Early Access Button */}
             <motion.button
-              onClick={handleEarlyAccess}
-              className="btn-cyber text-sm px-6 py-2"
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                console.log('Early Access clicked')
+                handleEarlyAccess()
+              }}
+              className="btn-cyber text-sm px-6 py-2 ml-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, scale: 0.8 }}
