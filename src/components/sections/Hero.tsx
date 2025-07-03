@@ -159,8 +159,8 @@ const Hero: React.FC = memo(() => {
                       <MessageCircle className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-lg font-bold text-white">500K+</div>
-                      <div className="text-xs text-gray-400">Viral Replies</div>
+                      <div className="text-lg font-bold text-white">100K+</div>
+                      <div className="text-xs text-gray-400">Replies Generated</div>
                     </div>
                   </div>
                 </motion.div>

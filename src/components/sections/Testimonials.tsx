@@ -13,11 +13,11 @@ const Testimonials: React.FC = () => {
     {
       id: 1,
       name: 'Manisha',
-      handle: '@ManishaCrypto',
+      handle: '',
       avatar: '/avatars/manisha.jpg',
       role: 'Beta Tester',
       followers: 'Early Adopter',
-      quote: 'As a beta tester, I\'ve seen YapMate evolve into something incredible. The AI understands crypto context perfectly and my engagement has skyrocketed during testing.',
+      quote: 'I\'ve been testing YapMate for weeks and it\'s mind-blowing! The AI actually understands crypto slang, memes, and context. My replies went from getting 2-3 likes to consistently hitting 50+ likes. It feels like having a crypto-native copywriter in my pocket.',
       metrics: 'Beta testing since day 1',
       verified: true,
       icon: TrendingUp,
@@ -28,11 +28,11 @@ const Testimonials: React.FC = () => {
     {
       id: 2,
       name: 'Aisdor',
-      handle: '@AisdorDeFi',
+      handle: '',
       avatar: '/avatars/aisdor.jpg',
       role: 'Beta Tester',
       followers: 'Community Member',
-      quote: 'Testing YapMate has been amazing! The AI generates replies that sound exactly like how I would write them, but better. Can\'t wait for the public release.',
+      quote: 'This tool is absolutely insane! I used to spend 10-15 minutes crafting the perfect reply, now YapMate generates 3 viral-worthy options in seconds. The AI knows when to be bullish, when to add humor, and when to drop alpha. My engagement rate during beta testing increased by 400%.',
       metrics: 'Active beta contributor',
       verified: true,
       icon: Users,
@@ -43,11 +43,11 @@ const Testimonials: React.FC = () => {
     {
       id: 3,
       name: 'Hiyan',
-      handle: '@HiyanCrypto',
+      handle: '',
       avatar: '/avatars/hiyan.jpg',
       role: 'Beta Tester',
       followers: 'Power User',
-      quote: 'Being part of the YapMate beta has been incredible. The tool saves me hours and my replies consistently get more engagement. This will change crypto Twitter forever.',
+      quote: 'YapMate is a complete game-changer for crypto Twitter! During beta testing, I\'ve seen my replies get retweeted by major influencers multiple times. The AI understands market sentiment, generates contextually perfect responses, and even adds the right amount of degen energy. This will 100% change how we engage on CT.',
       metrics: 'Beta feedback champion',
       verified: true,
       icon: Zap,
@@ -69,7 +69,7 @@ const Testimonials: React.FC = () => {
       viewport={{ once: true }}
       className="relative group"
     >
-      <div className={`card card-step group relative overflow-visible bg-gradient-to-br ${testimonial.bgGradient} border border-white/10 hover:border-green-400/30 transition-all duration-500 pt-8 pb-6 px-6 min-h-[420px] flex flex-col`}>
+      <div className={`card card-step group relative overflow-visible bg-gradient-to-br ${testimonial.bgGradient} border border-white/10 hover:border-green-400/30 transition-all duration-500 pt-8 pb-6 px-6 h-[480px] flex flex-col`}>
         {/* Animated Background Glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-green-400/5 via-blue-400/5 to-purple-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -107,15 +107,14 @@ const Testimonials: React.FC = () => {
         {/* User Info */}
         <div className="text-center space-y-2 relative z-10 mb-4">
           <div className="flex items-center justify-center gap-2">
-            <h4 className="text-base md:text-lg font-bold text-white">{testimonial.name}</h4>
+            <h4 className="text-lg md:text-xl font-bold text-white">{testimonial.name}</h4>
           </div>
-          <p className="text-xs md:text-sm text-green-400 font-medium">{testimonial.handle}</p>
-          <p className="text-xs text-gray-400">{testimonial.role} • {testimonial.followers}</p>
+          <p className="text-sm text-gray-400">{testimonial.role} • {testimonial.followers}</p>
         </div>
 
         {/* Quote */}
-        <div className="text-center space-y-3 relative z-10 flex-1 flex flex-col min-h-[120px]">
-          <blockquote className="text-gray-400 leading-relaxed text-xs md:text-sm px-2 flex-1 italic line-clamp-4">
+        <div className="text-center space-y-3 relative z-10 flex-1 flex flex-col">
+          <blockquote className="text-gray-300 leading-relaxed text-sm px-2 flex-1 italic">
             "{testimonial.quote}"
           </blockquote>
 
@@ -222,7 +221,7 @@ const Testimonials: React.FC = () => {
             >
               <div className="flex items-center justify-center gap-2">
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-white">10K+ Users</span>
+                <span className="text-sm font-medium text-white">50+ Beta Testers</span>
               </div>
             </motion.div>
 
@@ -233,7 +232,7 @@ const Testimonials: React.FC = () => {
             >
               <div className="flex items-center justify-center gap-2">
                 <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-white">500K+ Replies</span>
+                <span className="text-sm font-medium text-white">100K+ Replies</span>
               </div>
             </motion.div>
 
@@ -244,7 +243,7 @@ const Testimonials: React.FC = () => {
             >
               <div className="flex items-center justify-center gap-2">
                 <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-white">95% Success</span>
+                <span className="text-sm font-medium text-white">99% Success</span>
               </div>
             </motion.div>
 

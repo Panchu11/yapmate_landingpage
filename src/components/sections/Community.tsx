@@ -9,7 +9,7 @@ const Community: React.FC = () => {
     {
       id: 0,
       name: 'Manisha',
-      handle: '@ManishaCrypto',
+      handle: '',
       avatar: '🚀',
       role: 'Beta Tester',
       followers: 'Early Adopter',
@@ -142,7 +142,6 @@ const Community: React.FC = () => {
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-4">
                     <h4 className="text-xl font-bold text-white">{testimonials[activeTestimonial].name}</h4>
-                    <span className="text-neon-blue">{testimonials[activeTestimonial].handle}</span>
                     <span className="text-gray-400">•</span>
                     <span className="text-gray-400">{testimonials[activeTestimonial].followers}</span>
                   </div>
