@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import {
   Brain,
@@ -14,8 +14,8 @@ import {
   Settings
 } from 'lucide-react'
 
-const Features: React.FC = () => {
-  const currentFeatures = [
+const Features: React.FC = memo(() => {
+  const currentFeatures = useMemo(() => [
     {
       icon: Brain,
       title: 'AI-Powered Replies',
@@ -80,9 +80,9 @@ const Features: React.FC = () => {
       emoji: '🛠️',
       badge: 'Enterprise Available'
     }
-  ]
+  ], [])
 
-  const comingSoonFeatures = [
+  const comingSoonFeatures = useMemo(() => [
     {
       icon: Bot,
       title: 'Agent Evolution',
@@ -111,7 +111,7 @@ const Features: React.FC = () => {
       emoji: '🧰',
       badge: 'Pro & Enterprise Only'
     }
-  ]
+  ], [])
 
   const FeatureCard = ({ feature, index, isComingSoon = false }: { feature: any, index: number, isComingSoon?: boolean }) => (
     <motion.div
@@ -335,6 +335,8 @@ const Features: React.FC = () => {
       </div>
     </section>
   )
-}
+})
+
+Features.displayName = 'Features'
 
 export default Features

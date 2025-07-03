@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import {
   Sparkles,
@@ -11,12 +11,15 @@ import {
   CheckCircle
 } from 'lucide-react'
 
-const Hero: React.FC = () => {
-  const scrollToFeatures = () => {
-    document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })
-  }
+const Hero: React.FC = memo(() => {
+  const scrollToFeatures = useCallback(() => {
+    const element = document.getElementById('features')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [])
 
-  const handleInstallExtension = () => {
+  const handleInstallExtension = useCallback(() => {
     // Create a beautiful modal-style alert for beta messaging
     const message = `🚀 YapMate is currently in Beta!\n\n📱 Extension will be available soon on Web Store\n\n💬 Join our Discord community for early access and updates!\n\nWould you like to join our Discord now?`
 
@@ -24,7 +27,7 @@ const Hero: React.FC = () => {
       // Open Discord in new tab
       window.open('https://discord.gg/Zk73mBPyYD', '_blank')
     }
-  }
+  }, [])
 
   return (
     <section className="section-hero relative overflow-hidden pt-32">
@@ -482,6 +485,8 @@ const Hero: React.FC = () => {
       </div>
     </section>
   )
-}
+})
+
+Hero.displayName = 'Hero'
 
 export default Hero

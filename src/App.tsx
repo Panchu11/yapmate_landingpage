@@ -1,7 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Toaster } from 'react-hot-toast'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
+import {
+  preloadCriticalResources,
+  addResourceHints,
+  optimizeWebVitals,
+  registerServiceWorker
+} from './utils/performance'
 
 // Layout Components
 
@@ -15,6 +23,24 @@ const HomePage = React.lazy(() => import('./pages/HomePage'))
 
 function App() {
   const [isReady, setIsReady] = useState(false)
+
+  // Initialize performance optimizations
+  useEffect(() => {
+    // Preload critical resources
+    preloadCriticalResources()
+
+    // Add resource hints for better loading
+    addResourceHints()
+
+    // Optimize Web Vitals
+    optimizeWebVitals()
+
+    // Register service worker for caching
+    registerServiceWorker()
+
+    // Mark app as ready
+    setIsReady(true)
+  }, [])
 
   // Analytics tracking hooks (temporarily disabled)
   // useScrollTracking()
@@ -56,7 +82,7 @@ function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <React.Suspense fallback={
+              <Suspense fallback={
                 <div className="section flex items-center justify-center">
                   <div className="text-green-400 animate-pulse">Loading...</div>
                 </div>
@@ -67,7 +93,7 @@ function App() {
                   <Route path="/terms-of-service" element={<TermsOfService />} />
                   <Route path="/cookie-policy" element={<CookiePolicy />} />
                 </Routes>
-              </React.Suspense>
+              </Suspense>
             </motion.div>
           )}
         </AnimatePresence>
@@ -99,6 +125,12 @@ function App() {
         />
 
         {/* Accessibility Toolbar and Performance Dashboard temporarily disabled */}
+
+        {/* Vercel Analytics for visitor tracking */}
+        <Analytics />
+
+        {/* Vercel Speed Insights for performance monitoring */}
+        <SpeedInsights />
       </div>
     </Router>
   )

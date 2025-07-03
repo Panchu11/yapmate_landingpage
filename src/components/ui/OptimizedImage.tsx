@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, memo, useCallback } from 'react'
 import { motion } from 'framer-motion'
+import { optimizeImage } from '../../utils/performance'
 
 interface OptimizedImageProps {
   src: string
@@ -14,14 +15,14 @@ interface OptimizedImageProps {
   onError?: () => void
 }
 
-const OptimizedImage: React.FC<OptimizedImageProps> = ({
+const OptimizedImage: React.FC<OptimizedImageProps> = memo(({
   src,
   alt,
   width,
   height,
   className = '',
   placeholder,
-  quality: _quality = 85,
+  quality = 85,
   priority = false,
   onLoad,
   onError
@@ -30,7 +31,21 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const [isError, setIsError] = useState(false)
   const [isInView, setIsInView] = useState(priority)
   const imgRef = useRef<HTMLImageElement>(null)
+
+  // Optimize image source with performance utils
+  const optimizedSrc = optimizeImage(src, { width, height, quality })
   const containerRef = useRef<HTMLDivElement>(null)
+
+  // Optimized event handlers
+  const handleLoad = useCallback(() => {
+    setIsLoaded(true)
+    onLoad?.()
+  }, [onLoad])
+
+  const handleError = useCallback(() => {
+    setIsError(true)
+    onError?.()
+  }, [onError])
 
   // Intersection Observer for lazy loading
   useEffect(() => {
@@ -57,23 +72,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     return () => observer.disconnect()
   }, [priority])
 
-  // Generate optimized image URL (in a real app, you'd use a service like Cloudinary)
-  const getOptimizedSrc = (originalSrc: string) => {
-    // For now, return original src
-    // In production, you'd add query parameters for optimization:
-    // return `${originalSrc}?w=${width}&h=${height}&q=${quality}&f=webp`
-    return originalSrc
-  }
 
-  const handleLoad = () => {
-    setIsLoaded(true)
-    onLoad?.()
-  }
-
-  const handleError = () => {
-    setIsError(true)
-    onError?.()
-  }
 
   const imageStyle = {
     width: width ? `${width}px` : 'auto',
@@ -123,7 +122,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       {isInView && (
         <motion.img
           ref={imgRef}
-          src={getOptimizedSrc(src)}
+          src={optimizedSrc}
           alt={alt}
           className={`transition-opacity duration-300 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
@@ -134,7 +133,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
           initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ 
+          animate={{
             opacity: isLoaded ? 1 : 0,
             scale: isLoaded ? 1 : 1.1
           }}
@@ -143,6 +142,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       )}
     </div>
   )
-}
+})
+
+OptimizedImage.displayName = 'OptimizedImage'
 
 export default OptimizedImage

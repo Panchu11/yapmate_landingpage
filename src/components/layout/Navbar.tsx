@@ -1,26 +1,31 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Zap } from 'lucide-react'
+import { throttle } from '../../utils/performance'
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC = memo(() => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => {
+  const handleScroll = useCallback(
+    throttle(() => {
       setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    }, 16), // 60fps throttling
+    []
+  )
 
-  const navItems = [
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
+
+  const navItems = useMemo(() => [
     { name: 'Features', href: '#features' },
     { name: 'Demo', href: '#demo' },
     { name: 'Roadmap', href: '#roadmap' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'Community', href: '#community' },
-  ]
+  ], [])
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href)
@@ -135,6 +140,8 @@ const Navbar: React.FC = () => {
       </AnimatePresence>
     </motion.nav>
   )
-}
+})
+
+Navbar.displayName = 'Navbar'
 
 export default Navbar
