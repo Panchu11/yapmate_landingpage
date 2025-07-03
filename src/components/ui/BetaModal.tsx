@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Sparkles, Clock, Rocket, Zap, Crown, Users } from 'lucide-react'
 
@@ -9,6 +9,20 @@ interface BetaModalProps {
 }
 
 const BetaModal: React.FC<BetaModalProps> = ({ isOpen, onClose, type }) => {
+  // Lock scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
   const getModalContent = () => {
     switch (type) {
       case 'install':
@@ -22,7 +36,7 @@ const BetaModal: React.FC<BetaModalProps> = ({ isOpen, onClose, type }) => {
             { icon: Rocket, color: 'text-purple-400', text: 'Beta testing privileges' },
             { icon: Sparkles, color: 'text-green-400', text: 'Shape the future of YapMate' }
           ],
-          buttonText: 'Join Beta Waitlist',
+          buttonText: 'Join Beta Community',
           footerText: 'Extension launches with public release'
         }
       
@@ -86,6 +100,7 @@ const BetaModal: React.FC<BetaModalProps> = ({ isOpen, onClose, type }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100]"
+            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
             onClick={onClose}
           />
           
@@ -96,6 +111,7 @@ const BetaModal: React.FC<BetaModalProps> = ({ isOpen, onClose, type }) => {
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="fixed inset-0 flex items-center justify-center z-[101] p-4"
+            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="bg-black/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 max-w-md w-full shadow-2xl relative">
