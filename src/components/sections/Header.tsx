@@ -37,10 +37,12 @@ const Header: React.FC = () => {
     }
   }, [isResourcesOpen])
 
-  // Navigation items
+  // Navigation items - Updated to match actual sections
   const navItems = [
     { name: 'Features', href: '#features' },
     { name: 'How it Works', href: '#how-it-works' },
+    { name: 'Testimonials', href: '#testimonials' },
+    { name: 'Roadmap', href: '#roadmap' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'FAQ', href: '#faq' }
   ]
@@ -53,27 +55,19 @@ const Header: React.FC = () => {
     { name: 'Discord Community', href: 'https://discord.gg/Zk73mBPyYD', external: true }
   ]
 
-  // Smooth scroll to section with header offset
+  // Smooth scroll to section with header offset - Enhanced for lazy loading
   const scrollToSection = (href: string) => {
-    console.log('scrollToSection called with:', href)
-
     const sectionId = href.replace('#', '')
-    console.log('Looking for section with id:', sectionId)
 
     // Close mobile menu first
     setIsMobileMenuOpen(false)
     setIsResourcesOpen(false)
 
-    // Find the element immediately
-    const element = document.getElementById(sectionId)
-    console.log('Element found:', element)
-
-    if (element) {
+    // Function to perform the scroll
+    const performScroll = (element: HTMLElement) => {
       const headerHeight = 100 // Account for fixed header height + padding
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
       const offsetPosition = elementPosition - headerHeight
-
-      console.log('Scrolling to position:', offsetPosition)
 
       window.scrollTo({
         top: offsetPosition,
@@ -86,16 +80,43 @@ const Header: React.FC = () => {
       setTimeout(() => {
         element.style.boxShadow = ''
       }, 1000)
+    }
 
+    // Try to find the element immediately
+    let element = document.getElementById(sectionId)
+
+    if (element) {
+      performScroll(element)
     } else {
-      console.warn(`Section with id "${sectionId}" not found`)
-      // Debug: List all available sections
-      const sections = document.querySelectorAll('section')
-      console.log('Available sections:', Array.from(sections).map(s => ({ id: s.id, className: s.className })))
+      // Element not found - might be lazy loaded
+      // Wait a bit for lazy loading and try again
+      setTimeout(() => {
+        element = document.getElementById(sectionId)
+        if (element) {
+          performScroll(element)
+        } else {
+          // Still not found - scroll to approximate position based on section order
+          const sectionOrder = ['features', 'how-it-works', 'testimonials', 'roadmap', 'pricing', 'faq']
+          const sectionIndex = sectionOrder.indexOf(sectionId)
 
-      // Try alternative approach
-      const allElements = document.querySelectorAll(`[id="${sectionId}"]`)
-      console.log('Elements with matching id:', allElements)
+          if (sectionIndex !== -1) {
+            // Estimate position based on section index (each section ~800px)
+            const estimatedPosition = (sectionIndex + 1) * 800
+            window.scrollTo({
+              top: estimatedPosition,
+              behavior: 'smooth'
+            })
+
+            // Try again after scrolling to trigger lazy loading
+            setTimeout(() => {
+              const finalElement = document.getElementById(sectionId)
+              if (finalElement) {
+                performScroll(finalElement)
+              }
+            }, 1000)
+          }
+        }
+      }, 100)
     }
   }
 

@@ -39,10 +39,34 @@ const Footer: React.FC = () => {
     ]
   }
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId.replace('#', ''))
+  const scrollToSection = (href: string) => {
+    const sectionId = href.replace('#', '')
+
+    // Function to perform the scroll with header offset
+    const performScroll = (element: HTMLElement) => {
+      const headerHeight = 100 // Account for fixed header height + padding
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition - headerHeight
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+
+    // Try to find the element immediately
+    let element = document.getElementById(sectionId)
+
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      performScroll(element)
+    } else {
+      // Element not found - might be lazy loaded, wait and try again
+      setTimeout(() => {
+        element = document.getElementById(sectionId)
+        if (element) {
+          performScroll(element)
+        }
+      }, 100)
     }
   }
 
