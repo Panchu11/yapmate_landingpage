@@ -32,7 +32,7 @@ const Testimonials: React.FC = () => {
       avatar: '/avatars/aisdor.jpg',
       role: 'Beta Tester',
       followers: 'Community Member',
-      quote: 'This tool is absolutely insane! I used to spend 10-15 minutes crafting the perfect reply, now YapMate generates 3 viral-worthy options in seconds. The AI knows when to be bullish, when to add humor, and when to drop alpha. My engagement rate during beta testing increased by 400%.',
+      quote: 'This tool is absolutely insane! I used to spend 15 minutes crafting replies, now YapMate generates 3 viral options in seconds. The AI knows when to be bullish, add humor, or drop alpha. My engagement increased by 400% during beta testing.',
       metrics: 'Active contributor',
       verified: true,
       icon: Users,
@@ -47,7 +47,7 @@ const Testimonials: React.FC = () => {
       avatar: '/avatars/hiyan.jpg',
       role: 'Beta Tester',
       followers: 'Power User',
-      quote: 'YapMate is a complete game-changer for crypto Twitter! During beta testing, I\'ve seen my replies get retweeted by major influencers multiple times. The AI understands market sentiment, generates contextually perfect responses, and even adds the right amount of degen energy. This will 100% change how we engage on CT.',
+      quote: 'YapMate is a complete game-changer! During beta testing, my replies got retweeted by major influencers multiple times. The AI understands market sentiment and generates perfect responses with the right degen energy. This will 100% change crypto Twitter.',
       metrics: 'Power beta tester',
       verified: true,
       icon: Zap,
@@ -69,7 +69,7 @@ const Testimonials: React.FC = () => {
       viewport={{ once: true }}
       className="relative group"
     >
-      <div className={`card card-step group relative overflow-visible bg-gradient-to-br ${testimonial.bgGradient} border border-white/10 hover:border-green-400/30 transition-all duration-500 pt-8 pb-6 px-6 h-[480px] flex flex-col`}>
+      <div className={`card card-step group relative overflow-hidden bg-gradient-to-br ${testimonial.bgGradient} border border-white/10 hover:border-green-400/30 transition-all duration-500 pt-8 pb-6 px-6 h-[520px] flex flex-col`}>
         {/* Animated Background Glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-green-400/5 via-blue-400/5 to-purple-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -119,10 +119,10 @@ const Testimonials: React.FC = () => {
           </blockquote>
 
           {/* Metrics */}
-          <div className="bg-gradient-to-r from-green-400/10 to-blue-500/10 rounded-xl p-3 border border-green-400/20 mt-auto">
-            <div className="flex items-center justify-center gap-2 px-2">
+          <div className="bg-gradient-to-r from-green-400/10 to-blue-500/10 rounded-xl p-3 border border-green-400/20 mt-auto mb-2">
+            <div className="flex items-center justify-center gap-2 px-1">
               <TrendingUp className="w-4 h-4 text-green-400 flex-shrink-0" />
-              <span className="text-xs font-medium text-green-400 text-center truncate">{testimonial.metrics}</span>
+              <span className="text-xs font-medium text-green-400 text-center">{testimonial.metrics}</span>
             </div>
             <div className="flex items-center justify-center gap-1 mt-2">
               {Array.from({ length: 5 }).map((_, i) => (
