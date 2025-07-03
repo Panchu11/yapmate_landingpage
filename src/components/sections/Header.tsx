@@ -212,43 +212,51 @@ const Header: React.FC = () => {
           </motion.button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {/* Core Navigation Items */}
-            {coreNavItems.map((item, index) => (
-              <motion.button
-                key={item.name}
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  console.log('Navigation clicked:', item.name)
-                  scrollToSection(item.href)
-                }}
-                className="text-gray-300 hover:text-neon-green transition-colors duration-200 font-medium px-2 py-1"
-                whileHover={{ y: -2 }}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                {item.name}
-              </motion.button>
-            ))}
+          <div className="hidden md:flex items-center">
+            {/* Core Navigation Container */}
+            <nav className="flex items-center space-x-6 mr-8">
+              {coreNavItems.map((item, index) => (
+                <motion.button
+                  key={item.name}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    console.log('Navigation clicked:', item.name)
+                    scrollToSection(item.href)
+                  }}
+                  className="text-gray-300 hover:text-neon-green transition-colors duration-200 font-medium px-3 py-2 rounded-lg hover:bg-white/5"
+                  whileHover={{ y: -2 }}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  {item.name}
+                </motion.button>
+              ))}
+            </nav>
 
-            {/* More Dropdown */}
-            <div className="relative">
+            {/* More Dropdown Container - Completely Separate */}
+            <div className="relative mr-6">
               <motion.button
+                type="button"
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  console.log('More dropdown clicked')
+                  console.log('More dropdown clicked - current state:', isNavigationOpen)
+                  console.log('Setting navigation open to:', !isNavigationOpen)
                   setIsNavigationOpen(!isNavigationOpen)
                 }}
-                className="flex items-center gap-1 text-gray-300 hover:text-neon-green transition-colors duration-200 font-medium px-2 py-1"
+                className={`flex items-center gap-1 transition-colors duration-200 font-medium px-3 py-2 rounded-lg border ${
+                  isNavigationOpen
+                    ? 'text-neon-green bg-white/10 border-green-400/30'
+                    : 'text-gray-300 hover:text-neon-green hover:bg-white/5 border-transparent hover:border-white/10'
+                }`}
                 whileHover={{ y: -2 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                More
+                More {isNavigationOpen && '(Open)'}
                 <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isNavigationOpen ? 'rotate-180' : ''}`} />
               </motion.button>
 
@@ -256,12 +264,16 @@ const Header: React.FC = () => {
               <AnimatePresence>
                 {isNavigationOpen && (
                   <motion.div
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      console.log('Dropdown menu clicked - staying open')
+                    }}
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute top-full right-0 mt-3 w-80 bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl py-4 z-50"
+                    className="absolute top-full right-0 mt-3 w-80 bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl py-4 z-[9999]"
+                    style={{ zIndex: 9999 }}
                   >
                     {/* Dropdown Header */}
                     <div className="px-4 pb-3 border-b border-white/10">
@@ -317,23 +329,26 @@ const Header: React.FC = () => {
               </AnimatePresence>
             </div>
 
-            {/* Early Access Button */}
-            <motion.button
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                console.log('Early Access clicked')
-                handleEarlyAccess()
-              }}
-              className="btn-cyber text-sm px-6 py-2 ml-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              Get Early Access
-            </motion.button>
+            {/* Early Access Button - Completely Separate Container */}
+            <div className="flex-shrink-0">
+              <motion.button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  console.log('Early Access clicked')
+                  handleEarlyAccess()
+                }}
+                className="btn-cyber text-sm px-6 py-2 border border-green-400/20 hover:border-green-400/40"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                Get Early Access
+              </motion.button>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
