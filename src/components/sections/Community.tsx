@@ -8,13 +8,13 @@ const Community: React.FC = () => {
   const testimonials = [
     {
       id: 0,
-      name: 'Alex Chen',
-      handle: '@CryptoAlexChen',
+      name: 'Manisha',
+      handle: '@ManishaCrypto',
       avatar: '🚀',
-      role: 'Crypto Influencer',
-      followers: '125K',
-      content: "YapMate has completely transformed my Twitter engagement! My replies now get 10x more likes and retweets. The AI understands crypto culture perfectly. This is a game-changer for anyone serious about building their CT presence.",
-      metrics: { engagement: '+300%', followers: '+15K', reach: '2.5M' }
+      role: 'Beta Tester',
+      followers: 'Early Adopter',
+      content: "Testing YapMate has been incredible! The AI perfectly captures crypto culture and my engagement during beta testing has been amazing. This tool will revolutionize how we interact on crypto Twitter.",
+      metrics: { engagement: '+400%', followers: 'Beta Phase', reach: 'Testing' }
     },
     {
       id: 1,
@@ -39,9 +39,9 @@ const Community: React.FC = () => {
   ]
 
   const communityStats = [
-    { label: 'Active Users', value: '25,000+', icon: Users, color: 'text-neon-green' },
-    { label: 'Replies Generated', value: '2.5M+', icon: MessageCircle, color: 'text-neon-blue' },
-    { label: 'Avg. Engagement Boost', value: '300%', icon: TrendingUp, color: 'text-purple-400' },
+    { label: 'Beta Testers', value: '50+', icon: Users, color: 'text-neon-green' },
+    { label: 'Replies Generated', value: '100K+', icon: MessageCircle, color: 'text-neon-blue' },
+    { label: 'Avg. Engagement Boost', value: '400%', icon: TrendingUp, color: 'text-purple-400' },
     { label: 'User Satisfaction', value: '4.9/5', icon: Star, color: 'text-yellow-400' }
   ]
 
@@ -58,8 +58,8 @@ const Community: React.FC = () => {
     {
       name: 'Discord Server',
       handle: 'YapMate Official',
-      members: '8K members',
-      description: 'Real-time chat, support, and exclusive alpha',
+      members: '50+ beta testers',
+      description: 'Beta testing community, feedback, and exclusive access',
       icon: MessageCircle,
       color: 'from-purple-400 to-pink-500',
       link: 'https://discord.gg/agprotocol'
@@ -144,7 +144,7 @@ const Community: React.FC = () => {
                     <h4 className="text-xl font-bold text-white">{testimonials[activeTestimonial].name}</h4>
                     <span className="text-neon-blue">{testimonials[activeTestimonial].handle}</span>
                     <span className="text-gray-400">•</span>
-                    <span className="text-gray-400">{testimonials[activeTestimonial].followers} followers</span>
+                    <span className="text-gray-400">{testimonials[activeTestimonial].followers}</span>
                   </div>
                   <p className="text-gray-400 text-sm mb-4">{testimonials[activeTestimonial].role}</p>
                   <div className="relative">

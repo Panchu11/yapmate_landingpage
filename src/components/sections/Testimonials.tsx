@@ -12,13 +12,13 @@ const Testimonials: React.FC = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Alex Chen',
-      handle: '@CryptoAlexC',
-      avatar: '/avatars/alex.jpg',
-      role: 'Crypto Influencer',
-      followers: '127K',
-      quote: 'Went from 2K to 50K followers in 3 months using YapMate. My replies now get more engagement than most people\'s main tweets.',
-      metrics: '2.3M impressions last month',
+      name: 'Manisha',
+      handle: '@ManishaCrypto',
+      avatar: '/avatars/manisha.jpg',
+      role: 'Beta Tester',
+      followers: 'Early Adopter',
+      quote: 'As a beta tester, I\'ve seen YapMate evolve into something incredible. The AI understands crypto context perfectly and my engagement has skyrocketed during testing.',
+      metrics: 'Beta testing since day 1',
       verified: true,
       icon: TrendingUp,
       color: 'from-green-400 to-emerald-500',
@@ -27,13 +27,13 @@ const Testimonials: React.FC = () => {
     },
     {
       id: 2,
-      name: 'Sarah Martinez',
-      handle: '@DeFiSarah',
-      avatar: '/avatars/sarah.jpg',
-      role: 'DeFi Analyst',
-      followers: '89K',
-      quote: 'YapMate helped me sound like a crypto expert from day one. Now VCs slide into my DMs asking for alpha.',
-      metrics: '1.8M impressions last month',
+      name: 'Aisdor',
+      handle: '@AisdorDeFi',
+      avatar: '/avatars/aisdor.jpg',
+      role: 'Beta Tester',
+      followers: 'Community Member',
+      quote: 'Testing YapMate has been amazing! The AI generates replies that sound exactly like how I would write them, but better. Can\'t wait for the public release.',
+      metrics: 'Active beta contributor',
       verified: true,
       icon: Users,
       color: 'from-blue-400 to-cyan-500',
@@ -42,13 +42,13 @@ const Testimonials: React.FC = () => {
     },
     {
       id: 3,
-      name: 'Mike Thompson',
-      handle: '@NFTMike',
-      avatar: '/avatars/mike.jpg',
-      role: 'NFT Trader',
-      followers: '156K',
-      quote: 'I used to spend hours crafting replies. Now I generate viral content in seconds. Game changer for busy traders.',
-      metrics: '3.1M impressions last month',
+      name: 'Hiyan',
+      handle: '@HiyanCrypto',
+      avatar: '/avatars/hiyan.jpg',
+      role: 'Beta Tester',
+      followers: 'Power User',
+      quote: 'Being part of the YapMate beta has been incredible. The tool saves me hours and my replies consistently get more engagement. This will change crypto Twitter forever.',
+      metrics: 'Beta feedback champion',
       verified: true,
       icon: Zap,
       color: 'from-purple-400 to-pink-500',
@@ -110,7 +110,7 @@ const Testimonials: React.FC = () => {
             <h4 className="text-base md:text-lg font-bold text-white">{testimonial.name}</h4>
           </div>
           <p className="text-xs md:text-sm text-green-400 font-medium">{testimonial.handle}</p>
-          <p className="text-xs text-gray-400">{testimonial.role} • {testimonial.followers} followers</p>
+          <p className="text-xs text-gray-400">{testimonial.role} • {testimonial.followers}</p>
         </div>
 
         {/* Quote */}
@@ -193,7 +193,7 @@ const Testimonials: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <span className="text-white font-medium">Real results from real influencers who've transformed their Twitter presence with YapMate.</span>
+            <span className="text-white font-medium">Real feedback from our beta testing community who are helping shape YapMate's future.</span>
           </motion.p>
         </div>
 

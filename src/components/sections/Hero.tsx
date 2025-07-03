@@ -143,8 +143,8 @@ const Hero: React.FC = memo(() => {
                       <Users className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-lg font-bold text-white">10K+</div>
-                      <div className="text-xs text-gray-400">Active Users</div>
+                      <div className="text-lg font-bold text-white">50+</div>
+                      <div className="text-xs text-gray-400">Beta Testers</div>
                     </div>
                   </div>
                 </motion.div>
@@ -459,8 +459,8 @@ const Hero: React.FC = memo(() => {
           className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mt-16"
         >
           {[
-            { number: '10K+', label: 'Active Users', icon: Users },
-            { number: '500K+', label: 'Replies Generated', icon: MessageCircle },
+            { number: '50+', label: 'Beta Testers', icon: Users },
+            { number: '100K+', label: 'Replies Generated', icon: MessageCircle },
             { number: '4.9★', label: 'User Rating', icon: Star },
           ].map((stat, index) => (
             <motion.div

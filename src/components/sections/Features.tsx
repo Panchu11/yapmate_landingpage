@@ -22,7 +22,7 @@ const Features: React.FC = memo(() => {
       subtitle: 'Replies That Actually Get Engagement',
       description: 'Generate context-aware, crypto-fluent replies in seconds — trained on viral CT data.',
       color: 'from-green-400 to-blue-500',
-      stats: ['95% engagement boost', '10x higher average reply visibility'],
+      stats: ['99% engagement boost', '10x higher average reply visibility'],
       emoji: '🧠'
     },
     {
@@ -58,16 +58,16 @@ const Features: React.FC = memo(() => {
       subtitle: 'Trained on Virality. Tuned for Reach.',
       description: 'Learn from the most liked CT replies. Every output optimized to perform.',
       color: 'from-blue-400 to-green-500',
-      stats: ['500K+ viral replies generated', 'CT-native meme + tone injection'],
+      stats: ['100K+ viral replies generated', 'CT-native meme + tone injection'],
       emoji: '🚀'
     },
     {
       icon: Users,
       title: 'Community Access',
-      subtitle: 'Built With Influencers. Used by Thousands.',
-      description: 'Access invite-only Discord of CT strategists, early testers, and alpha drops.',
+      subtitle: 'Built With Beta Testers. Shaped by Community.',
+      description: 'Access invite-only Discord of beta testers, early adopters, and alpha drops.',
       color: 'from-purple-400 to-blue-500',
-      stats: ['500+ members', 'Direct line to core team'],
+      stats: ['50+ beta members', 'Direct line to core team'],
       emoji: '🌐'
     },
     {

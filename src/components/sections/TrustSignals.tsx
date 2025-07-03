@@ -34,9 +34,9 @@ const TrustSignals: React.FC = () => {
     {
       id: 3,
       icon: Users,
-      title: '10,000+ Happy Users',
-      subtitle: 'Join the crypto Twitter elite',
-      description: 'Thousands of influencers and traders trust YapMate to boost their engagement.',
+      title: '50+ Beta Testers',
+      subtitle: 'Join the exclusive beta community',
+      description: 'Our beta testers are already seeing incredible results and helping shape the future.',
       color: 'from-purple-500 to-green-400',
       emoji: '👥',
       bgGradient: 'from-purple-500/10 to-green-500/10'
@@ -46,7 +46,7 @@ const TrustSignals: React.FC = () => {
       icon: Zap,
       title: 'Instant Results',
       subtitle: 'See viral replies within 24 hours',
-      description: 'Most users see their first viral reply within the first day of using YapMate.',
+      description: 'Beta testers report seeing their first viral reply within the first day of testing.',
       color: 'from-yellow-400 to-orange-500',
       emoji: '⚡',
       bgGradient: 'from-yellow-500/10 to-orange-500/10'
@@ -54,9 +54,9 @@ const TrustSignals: React.FC = () => {
   ]
 
   const metrics = [
-    { value: '10,000+', label: 'Active Users', icon: Users, color: 'from-green-400 to-emerald-500' },
-    { value: '500K+', label: 'Viral Replies', icon: TrendingUp, color: 'from-blue-400 to-cyan-500' },
-    { value: '95%', label: 'Success Rate', icon: Award, color: 'from-purple-400 to-pink-500' },
+    { value: '50+', label: 'Beta Testers', icon: Users, color: 'from-green-400 to-emerald-500' },
+    { value: '100K+', label: 'Replies Generated', icon: TrendingUp, color: 'from-blue-400 to-cyan-500' },
+    { value: '99%', label: 'Success Rate', icon: Award, color: 'from-purple-400 to-pink-500' },
     { value: '4.9/5', label: 'User Rating', icon: Shield, color: 'from-yellow-400 to-orange-500' }
   ]
 
@@ -180,7 +180,7 @@ const TrustSignals: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <span className="text-white font-medium">Join thousands of successful crypto influencers who trust YapMate with their Twitter growth.</span>
+            <span className="text-white font-medium">Join our exclusive beta community and help shape the future of crypto Twitter engagement.</span>
           </motion.p>
         </div>
 
