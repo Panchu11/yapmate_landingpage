@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, Zap, Brain, DollarSign, HelpCircle, Star, MapPin, Shield } from 'lucide-react'
+import { Menu, X, ChevronDown, Zap, Brain, Star, MapPin, DollarSign, HelpCircle, Shield } from 'lucide-react'
 import Logo from '../ui/Logo'
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isNavigationOpen, setIsNavigationOpen] = useState(false)
-  const [scrollProgress, setScrollProgress] = useState(0)
 
-  // Handle scroll effect and progress
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
-
-      // Calculate scroll progress
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight
-      const progress = (window.scrollY / totalHeight) * 100
-      setScrollProgress(Math.min(progress, 100))
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -27,13 +21,16 @@ const Header: React.FC = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement
-      if (!target.closest('.relative')) {
+      const dropdownContainer = document.querySelector('.dropdown-container')
+
+      if (dropdownContainer && !dropdownContainer.contains(target)) {
         setIsNavigationOpen(false)
       }
     }
+
     if (isNavigationOpen) {
-      document.addEventListener('click', handleClickOutside)
-      return () => document.removeEventListener('click', handleClickOutside)
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [isNavigationOpen])
 
@@ -99,14 +96,10 @@ const Header: React.FC = () => {
 
   // Handle early access button click
   const handleEarlyAccess = () => {
-    const message = `🚀 YapMate is currently in Beta!\n\n🎯 Want early access?\n\n💬 Join our Discord community to:\n• Get beta access\n• Connect with other testers\n• Provide feedback\n• Get updates\n\nWould you like to join our Discord now?`
-
-    if (confirm(message)) {
-      window.open('https://discord.gg/Zk73mBPyYD', '_blank')
-    }
+    window.open('https://discord.gg/Zk73mBPyYD', '_blank')
   }
 
-  // Smooth scroll to section with header offset - Enhanced for lazy loading
+  // Smooth scroll to section with header offset
   const scrollToSection = (href: string) => {
     const sectionId = href.replace('#', '')
 
@@ -139,15 +132,14 @@ const Header: React.FC = () => {
     if (element) {
       performScroll(element)
     } else {
-      // Element not found - might be lazy loaded
-      // Wait a bit for lazy loading and try again
+      // Element not found - might be lazy loaded, wait and try again
       setTimeout(() => {
         element = document.getElementById(sectionId)
         if (element) {
           performScroll(element)
         } else {
-          // Still not found - scroll to approximate position based on section order
-          const sectionOrder = ['features', 'how-it-works', 'testimonials', 'roadmap', 'pricing', 'faq']
+          // If still not found, try scrolling to estimated position
+          const sectionOrder = ['features', 'how-it-works', 'testimonials', 'roadmap', 'pricing', 'trust-signals', 'faq']
           const sectionIndex = sectionOrder.indexOf(sectionId)
 
           if (sectionIndex !== -1) {
@@ -221,7 +213,6 @@ const Header: React.FC = () => {
                   onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
-                    console.log('Navigation clicked:', item.name)
                     scrollToSection(item.href)
                   }}
                   className="text-gray-300 hover:text-neon-green transition-colors duration-200 font-medium px-3 py-2 rounded-lg hover:bg-white/5"
@@ -235,15 +226,12 @@ const Header: React.FC = () => {
               ))}
             </nav>
 
-            {/* More Dropdown Container - Completely Separate */}
-            <div className="relative mr-6">
+            {/* More Dropdown - Fixed with proper isolation */}
+            <div className="relative dropdown-container">
               <motion.button
-                type="button"
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  console.log('More dropdown clicked - current state:', isNavigationOpen)
-                  console.log('Setting navigation open to:', !isNavigationOpen)
                   setIsNavigationOpen(!isNavigationOpen)
                 }}
                 className={`flex items-center gap-1 transition-colors duration-200 font-medium px-3 py-2 rounded-lg border ${
@@ -256,7 +244,7 @@ const Header: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                More {isNavigationOpen && '(Open)'}
+                More
                 <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isNavigationOpen ? 'rotate-180' : ''}`} />
               </motion.button>
 
@@ -266,7 +254,6 @@ const Header: React.FC = () => {
                   <motion.div
                     onClick={(e) => {
                       e.stopPropagation()
-                      console.log('Dropdown menu clicked - staying open')
                     }}
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -298,25 +285,17 @@ const Header: React.FC = () => {
                                 onClick={(e) => {
                                   e.preventDefault()
                                   e.stopPropagation()
-                                  console.log('Dropdown item clicked:', item.name)
                                   scrollToSection(item.href)
                                 }}
-                                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-white/5 transition-all duration-200 group"
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: index * 0.05 }}
+                                className="flex items-center gap-3 w-full text-left text-gray-300 hover:text-white transition-all duration-300 py-2 px-4 rounded-xl hover:bg-white/5 mx-2"
                                 whileHover={{ x: 4 }}
                               >
-                                <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-green-400/20 to-blue-500/20 rounded-lg flex items-center justify-center group-hover:from-green-400/30 group-hover:to-blue-500/30 transition-all duration-200">
-                                  <item.icon className="w-4 h-4 text-green-400" />
+                                <div className="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-green-400/20 to-blue-500/20 rounded-lg flex items-center justify-center">
+                                  <item.icon className="w-3 h-3 text-green-400" />
                                 </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="text-sm font-medium text-white group-hover:text-green-400 transition-colors duration-200">
-                                    {item.name}
-                                  </div>
-                                  <div className="text-xs text-gray-400 truncate">
-                                    {item.description}
-                                  </div>
+                                <div className="flex-1">
+                                  <div className="font-medium text-sm">{item.name}</div>
+                                  <div className="text-xs text-gray-500">{item.description}</div>
                                 </div>
                               </motion.button>
                             ))}
@@ -336,7 +315,6 @@ const Header: React.FC = () => {
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  console.log('Early Access clicked')
                   handleEarlyAccess()
                 }}
                 className="btn-cyber text-sm px-6 py-2 border border-green-400/20 hover:border-green-400/40"
@@ -352,17 +330,16 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden p-2 text-gray-300 hover:text-white"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            whileTap={{ scale: 0.95 }}
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </motion.button>
+          <div className="md:hidden">
+            <motion.button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-gray-300 hover:text-white transition-colors duration-200 p-2"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </motion.button>
+          </div>
         </div>
       </div>
 
@@ -389,7 +366,7 @@ const Header: React.FC = () => {
                       className="block w-full text-left text-gray-300 hover:text-white transition-all duration-300 font-medium py-3 px-4 rounded-xl hover:bg-white/5"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.05 }}
                       whileHover={{ x: 4 }}
                     >
                       {item.name}
@@ -437,25 +414,6 @@ const Header: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Scroll Progress Bar */}
-      <motion.div
-        className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 opacity-80"
-        style={{ width: `${scrollProgress}%` }}
-        initial={{ width: 0 }}
-        animate={{ width: `${scrollProgress}%` }}
-        transition={{ duration: 0.1 }}
-      />
-
-      {/* Subtle glow effect when scrolled */}
-      {isScrolled && (
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-400/20 to-transparent"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        />
-      )}
     </motion.header>
   )
 }
