@@ -150,12 +150,12 @@ const Footer: React.FC = () => {
                 ))}
               </div>
               <motion.a
-                href="mailto:hello@agprotocol.xyz"
+                href="mailto:admin@yapmate.xyz"
                 className="text-gray-400 hover:text-green-400 transition-colors duration-300 block mb-4 hover:underline"
                 whileHover={{ x: 5 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                hello@agprotocol.xyz
+                admin@yapmate.xyz
               </motion.a>
             </div>
 
