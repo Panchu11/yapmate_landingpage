@@ -1,5 +1,4 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 
 // Section Components (Lazy loaded for performance)
 import Header from '../components/sections/Header'

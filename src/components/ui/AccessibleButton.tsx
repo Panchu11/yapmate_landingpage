@@ -33,6 +33,9 @@ const AccessibleButton = forwardRef<HTMLButtonElement, AccessibleButtonProps>(
       disabled,
       onAnimationStart,
       onAnimationEnd,
+      onDragStart,
+      onDragEnd,
+      onDrag,
       ...props
     },
     ref
