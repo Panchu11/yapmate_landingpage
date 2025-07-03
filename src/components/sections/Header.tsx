@@ -96,7 +96,7 @@ const Header: React.FC = () => {
 
 
 
-  // Smooth scroll to section with header offset
+  // BULLETPROOF scroll to section - handles lazy loading
   const scrollToSection = (href: string) => {
     const sectionId = href.replace('#', '')
 
@@ -106,7 +106,7 @@ const Header: React.FC = () => {
 
     // Function to perform the scroll
     const performScroll = (element: HTMLElement) => {
-      const headerHeight = 100 // Account for fixed header height + padding
+      const headerHeight = 100
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
       const offsetPosition = elementPosition - headerHeight
 
@@ -115,7 +115,7 @@ const Header: React.FC = () => {
         behavior: 'smooth'
       })
 
-      // Visual feedback - briefly highlight the section
+      // Visual feedback
       element.style.transition = 'box-shadow 0.3s ease'
       element.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.3)'
       setTimeout(() => {
@@ -123,41 +123,51 @@ const Header: React.FC = () => {
       }, 1000)
     }
 
-    // Try to find the element immediately
-    let element = document.getElementById(sectionId)
+    // Robust element finder with multiple retries
+    const findAndScrollToElement = (retryCount = 0) => {
+      const element = document.getElementById(sectionId)
 
-    if (element) {
-      performScroll(element)
-    } else {
-      // Element not found - might be lazy loaded, wait and try again
-      setTimeout(() => {
-        element = document.getElementById(sectionId)
-        if (element) {
-          performScroll(element)
-        } else {
-          // If still not found, try scrolling to estimated position
-          const sectionOrder = ['features', 'how-it-works', 'testimonials', 'roadmap', 'pricing', 'trust-signals', 'faq']
-          const sectionIndex = sectionOrder.indexOf(sectionId)
+      if (element) {
+        performScroll(element)
+        return
+      }
 
-          if (sectionIndex !== -1) {
-            // Estimate position based on section index (each section ~800px)
-            const estimatedPosition = (sectionIndex + 1) * 800
-            window.scrollTo({
-              top: estimatedPosition,
-              behavior: 'smooth'
-            })
+      // If element not found and we haven't exceeded retry limit
+      if (retryCount < 10) {
+        // Force scroll down to trigger lazy loading of all sections
+        const currentScroll = window.pageYOffset
+        const documentHeight = document.documentElement.scrollHeight
+        const windowHeight = window.innerHeight
 
-            // Try again after scrolling to trigger lazy loading
-            setTimeout(() => {
-              const finalElement = document.getElementById(sectionId)
-              if (finalElement) {
-                performScroll(finalElement)
-              }
-            }, 1000)
-          }
+        // Scroll to 80% of page to trigger all lazy loads
+        const triggerPosition = Math.min(documentHeight * 0.8, documentHeight - windowHeight)
+
+        window.scrollTo({
+          top: triggerPosition,
+          behavior: 'auto' // Instant scroll to trigger loading
+        })
+
+        // Wait for components to load, then try again
+        setTimeout(() => {
+          findAndScrollToElement(retryCount + 1)
+        }, 200)
+      } else {
+        // Fallback: scroll to estimated position
+        const sectionOrder = ['features', 'how-it-works', 'testimonials', 'roadmap', 'pricing', 'trust-signals', 'faq']
+        const sectionIndex = sectionOrder.indexOf(sectionId)
+
+        if (sectionIndex !== -1) {
+          const estimatedPosition = (sectionIndex + 1) * 900 // Increased estimate
+          window.scrollTo({
+            top: estimatedPosition,
+            behavior: 'smooth'
+          })
         }
-      }, 100)
+      }
     }
+
+    // Start the robust search
+    findAndScrollToElement()
   }
 
   return (
