@@ -94,10 +94,7 @@ const Header: React.FC = () => {
     }
   ]
 
-  // Handle early access button click
-  const handleEarlyAccess = () => {
-    window.open('https://discord.gg/Zk73mBPyYD', '_blank')
-  }
+
 
   // Smooth scroll to section with header offset
   const scrollToSection = (href: string) => {
@@ -308,20 +305,7 @@ const Header: React.FC = () => {
               </AnimatePresence>
             </div>
 
-            {/* Early Access Button - No Animations */}
-            <div className="flex-shrink-0">
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleEarlyAccess()
-                }}
-                className="btn-cyber text-sm px-6 py-2 border border-green-400/20 hover:border-green-400/40 transition-colors duration-200"
-              >
-                Get Early Access
-              </button>
-            </div>
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -394,12 +378,7 @@ const Header: React.FC = () => {
                 </div>
               </nav>
 
-              <button
-                onClick={handleEarlyAccess}
-                className="btn-cyber text-sm px-6 py-2 w-full mt-6 transition-colors duration-200"
-              >
-                Get Early Access
-              </button>
+
             </div>
           </motion.div>
         )}
