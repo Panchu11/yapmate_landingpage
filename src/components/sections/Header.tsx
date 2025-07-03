@@ -147,9 +147,9 @@ const Header: React.FC = () => {
           </motion.button>
 
           {/* Desktop Navigation - Enhanced */}
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center gap-4">
             {/* Core Navigation Container */}
-            <nav className="flex items-center space-x-2 mr-6">
+            <nav className="flex items-center space-x-2">
               {coreNavItems.map((item, index) => (
                 <motion.button
                   key={item.name}
@@ -174,7 +174,7 @@ const Header: React.FC = () => {
             </nav>
 
             {/* More Dropdown - Compact & Elegant */}
-            <div className="relative dropdown-container">
+            <div className="relative dropdown-container ml-2">
               <motion.button
                 onClick={(e) => {
                   e.preventDefault()
