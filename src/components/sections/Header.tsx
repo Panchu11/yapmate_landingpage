@@ -72,7 +72,7 @@ const Header: React.FC = () => {
 
 
 
-  // BULLETPROOF scroll to section - handles lazy loading
+  // INSTANT scroll to section - all sections are pre-rendered
   const scrollToSection = (href: string) => {
     const sectionId = href.replace('#', '')
 
@@ -80,8 +80,10 @@ const Header: React.FC = () => {
     setIsMobileMenuOpen(false)
     setIsNavigationOpen(false)
 
-    // Function to perform the scroll
-    const performScroll = (element: HTMLElement) => {
+    // Find and scroll to element (should always exist now)
+    const element = document.getElementById(sectionId)
+
+    if (element) {
       const headerHeight = 100
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
       const offsetPosition = elementPosition - headerHeight
@@ -97,52 +99,10 @@ const Header: React.FC = () => {
       setTimeout(() => {
         element.style.boxShadow = ''
       }, 1000)
+    } else {
+      // Fallback for edge cases
+      console.warn(`Section ${sectionId} not found`)
     }
-
-    // Robust element finder with multiple retries
-    const findAndScrollToElement = (retryCount = 0) => {
-      const element = document.getElementById(sectionId)
-
-      if (element) {
-        performScroll(element)
-        return
-      }
-
-      // If element not found and we haven't exceeded retry limit
-      if (retryCount < 10) {
-        // Force scroll down to trigger lazy loading of all sections
-        const documentHeight = document.documentElement.scrollHeight
-        const windowHeight = window.innerHeight
-
-        // Scroll to 80% of page to trigger all lazy loads
-        const triggerPosition = Math.min(documentHeight * 0.8, documentHeight - windowHeight)
-
-        window.scrollTo({
-          top: triggerPosition,
-          behavior: 'auto' // Instant scroll to trigger loading
-        })
-
-        // Wait for components to load, then try again
-        setTimeout(() => {
-          findAndScrollToElement(retryCount + 1)
-        }, 200)
-      } else {
-        // Fallback: scroll to estimated position
-        const sectionOrder = ['features', 'how-it-works', 'testimonials', 'roadmap', 'pricing', 'trust-signals', 'faq']
-        const sectionIndex = sectionOrder.indexOf(sectionId)
-
-        if (sectionIndex !== -1) {
-          const estimatedPosition = (sectionIndex + 1) * 900 // Increased estimate
-          window.scrollTo({
-            top: estimatedPosition,
-            behavior: 'smooth'
-          })
-        }
-      }
-    }
-
-    // Start the robust search
-    findAndScrollToElement()
   }
 
   return (

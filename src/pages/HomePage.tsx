@@ -1,22 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-// Section Components (Lazy loaded for performance)
+// Section Components (Pre-rendered for instant loading)
 import Header from '../components/sections/Header'
 import Hero from '../components/sections/Hero'
-import LazySection from '../components/ui/LazySection'
-
-// Lazy load heavy components
-const Features = React.lazy(() => import('../components/sections/Features'))
-const HowItWorks = React.lazy(() => import('../components/sections/HowItWorks'))
-const Testimonials = React.lazy(() => import('../components/sections/Testimonials'))
-const Roadmap = React.lazy(() => import('../components/sections/Roadmap'))
-const Pricing = React.lazy(() => import('../components/sections/Pricing'))
-const TrustSignals = React.lazy(() => import('../components/sections/TrustSignals'))
-const FAQ = React.lazy(() => import('../components/sections/FAQ'))
-const CTA = React.lazy(() => import('../components/sections/CTA'))
-const Footer = React.lazy(() => import('../components/sections/Footer'))
+import Features from '../components/sections/Features'
+import HowItWorks from '../components/sections/HowItWorks'
+import Testimonials from '../components/sections/Testimonials'
+import Roadmap from '../components/sections/Roadmap'
+import Pricing from '../components/sections/Pricing'
+import TrustSignals from '../components/sections/TrustSignals'
+import FAQ from '../components/sections/FAQ'
+import CTA from '../components/sections/CTA'
+import Footer from '../components/sections/Footer'
+import PreRenderedSection from '../components/ui/PreRenderedSection'
+import { preRenderStrategy, ensureContentAvailability } from '../utils/performance'
 
 const HomePage: React.FC = () => {
+  // Ensure all content is immediately available
+  useEffect(() => {
+    // Small delay to let components mount, then ensure availability
+    const timer = setTimeout(() => {
+      ensureContentAvailability()
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <>
       {/* Header */}
@@ -27,50 +36,71 @@ const HomePage: React.FC = () => {
         {/* Hero loads immediately */}
         <Hero />
 
-        {/* Other sections load lazily with beautiful dividers */}
-        <React.Suspense fallback={
-          <div className="section flex items-center justify-center">
-            <div className="text-green-400 animate-pulse">Loading...</div>
-          </div>
-        }>
-          <LazySection>
-            <Features />
-          </LazySection>
+        {/* All sections pre-rendered with optimized loading strategy */}
+        <PreRenderedSection
+          delay={preRenderStrategy.getDelay('features')}
+          animationDelay={preRenderStrategy.getAnimationDelay('features')}
+        >
+          <Features />
+        </PreRenderedSection>
 
-          <LazySection>
-            <HowItWorks />
-          </LazySection>
+        <PreRenderedSection
+          delay={preRenderStrategy.getDelay('how-it-works')}
+          animationDelay={preRenderStrategy.getAnimationDelay('how-it-works')}
+        >
+          <HowItWorks />
+        </PreRenderedSection>
 
-          <LazySection>
-            <Testimonials />
-          </LazySection>
+        <PreRenderedSection
+          delay={preRenderStrategy.getDelay('testimonials')}
+          animationDelay={preRenderStrategy.getAnimationDelay('testimonials')}
+        >
+          <Testimonials />
+        </PreRenderedSection>
 
-          <LazySection>
-            <Roadmap />
-          </LazySection>
+        <PreRenderedSection
+          delay={preRenderStrategy.getDelay('roadmap')}
+          animationDelay={preRenderStrategy.getAnimationDelay('roadmap')}
+        >
+          <Roadmap />
+        </PreRenderedSection>
 
-          <LazySection>
-            <Pricing />
-          </LazySection>
+        <PreRenderedSection
+          delay={preRenderStrategy.getDelay('pricing')}
+          animationDelay={preRenderStrategy.getAnimationDelay('pricing')}
+        >
+          <Pricing />
+        </PreRenderedSection>
 
-          <LazySection>
-            <TrustSignals />
-          </LazySection>
+        <PreRenderedSection
+          delay={preRenderStrategy.getDelay('trust-signals')}
+          animationDelay={preRenderStrategy.getAnimationDelay('trust-signals')}
+        >
+          <TrustSignals />
+        </PreRenderedSection>
 
-          <LazySection>
-            <FAQ />
-          </LazySection>
+        <PreRenderedSection
+          delay={preRenderStrategy.getDelay('faq')}
+          animationDelay={preRenderStrategy.getAnimationDelay('faq')}
+        >
+          <FAQ />
+        </PreRenderedSection>
 
-          <LazySection>
-            <CTA />
-          </LazySection>
-        </React.Suspense>
+        <PreRenderedSection
+          delay={preRenderStrategy.getDelay('cta')}
+          animationDelay={preRenderStrategy.getAnimationDelay('cta')}
+        >
+          <CTA />
+        </PreRenderedSection>
       </main>
 
       {/* Footer */}
-      <React.Suspense fallback={<div className="h-32"></div>}>
+      <PreRenderedSection
+        delay={preRenderStrategy.getDelay('footer')}
+        animationDelay={preRenderStrategy.getAnimationDelay('footer')}
+      >
         <Footer />
-      </React.Suspense>
+      </PreRenderedSection>
     </>
   )
 }

@@ -1,20 +1,48 @@
 // Performance optimization utilities for YapMate Landing Page
 import { lazy, ComponentType } from 'react'
 
-// Lazy loading with error boundaries and loading states
+// Pre-rendering strategy for instant content loading
+export const preRenderStrategy = {
+  // Critical sections that should load immediately
+  critical: ['hero', 'features', 'how-it-works'],
+
+  // Important sections with slight delay
+  important: ['testimonials', 'pricing', 'roadmap'],
+
+  // Secondary sections with more delay
+  secondary: ['trust-signals', 'faq', 'cta', 'footer'],
+
+  // Get delay for section
+  getDelay: (sectionName: string): number => {
+    if (preRenderStrategy.critical.includes(sectionName)) return 0
+    if (preRenderStrategy.important.includes(sectionName)) return 100
+    if (preRenderStrategy.secondary.includes(sectionName)) return 200
+    return 300
+  },
+
+  // Get animation delay for section
+  getAnimationDelay: (sectionName: string): number => {
+    if (preRenderStrategy.critical.includes(sectionName)) return 0
+    if (preRenderStrategy.important.includes(sectionName)) return 0.1
+    if (preRenderStrategy.secondary.includes(sectionName)) return 0.2
+    return 0.3
+  }
+}
+
+// Legacy lazy loading (kept for compatibility)
 export const createLazyComponent = <T extends ComponentType<any>>(
   importFn: () => Promise<{ default: T }>
 ) => {
   return lazy(importFn)
 }
 
-// Preload critical resources
+// Preload critical resources and ensure instant content availability
 export const preloadCriticalResources = () => {
   // Preload critical fonts
   const fontPreloads = [
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
   ]
-  
+
   fontPreloads.forEach(href => {
     const link = document.createElement('link')
     link.rel = 'preload'
@@ -25,6 +53,29 @@ export const preloadCriticalResources = () => {
     }
     document.head.appendChild(link)
   })
+}
+
+// Force immediate content rendering
+export const ensureContentAvailability = () => {
+  // Force browser to render all content immediately
+  if (typeof window !== 'undefined') {
+    // Disable lazy loading for images
+    const images = document.querySelectorAll('img[loading="lazy"]')
+    images.forEach(img => {
+      img.removeAttribute('loading')
+    })
+
+    // Force layout calculation to ensure all elements are rendered
+    document.body.offsetHeight
+
+    // Trigger a repaint to ensure everything is visible
+    requestAnimationFrame(() => {
+      document.body.style.transform = 'translateZ(0)'
+      requestAnimationFrame(() => {
+        document.body.style.transform = ''
+      })
+    })
+  }
 }
 
 // Image optimization and lazy loading
