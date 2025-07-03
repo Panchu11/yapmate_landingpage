@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import Logo from '../ui/Logo'
+import BetaModal from '../ui/BetaModal'
 
 // Custom X (Twitter) Icon
 const XIcon = ({ className }: { className?: string }) => (
@@ -19,6 +20,7 @@ const DiscordIcon = ({ className }: { className?: string }) => (
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()
+  const [isFooterModalOpen, setIsFooterModalOpen] = useState(false)
 
   const footerLinks = {
     product: [
@@ -71,6 +73,7 @@ const Footer: React.FC = () => {
   }
 
   return (
+    <>
     <footer className="bg-gradient-to-b from-gray-900/20 to-gray-900/40 border-t border-white/10 backdrop-blur-sm">
       <div className="container py-16">
         <div className="grid-3 gap-8">
@@ -95,7 +98,7 @@ const Footer: React.FC = () => {
             </p>
 
             <motion.button
-              onClick={() => alert('Coming Soon!')}
+              onClick={() => setIsFooterModalOpen(true)}
               className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold px-6 py-3 rounded-xl hover:from-green-500 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -218,6 +221,14 @@ const Footer: React.FC = () => {
         </motion.div>
       </div>
     </footer>
+
+    {/* Footer Modal */}
+    <BetaModal
+      isOpen={isFooterModalOpen}
+      onClose={() => setIsFooterModalOpen(false)}
+      type="footer"
+    />
+    </>
   )
 }
 

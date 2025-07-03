@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, Star, MapPin, HelpCircle, Shield, LogIn, Sparkles, Clock, Rocket } from 'lucide-react'
+import { Menu, X, ChevronDown, Star, MapPin, HelpCircle, Shield, LogIn } from 'lucide-react'
 import Logo from '../ui/Logo'
+import BetaModal from '../ui/BetaModal'
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -180,18 +181,22 @@ const Header: React.FC = () => {
                   e.stopPropagation()
                   setIsNavigationOpen(!isNavigationOpen)
                 }}
-                className={`flex items-center gap-2 transition-all duration-300 font-medium px-4 py-2.5 rounded-xl border group ${
+                className={`relative flex items-center gap-2 transition-all duration-300 font-medium px-4 py-2.5 rounded-xl hover:bg-white/8 group ${
                   isNavigationOpen
-                    ? 'text-green-400 bg-gradient-to-r from-green-400/10 to-blue-500/10 border-green-400/30 shadow-lg shadow-green-400/10'
-                    : 'text-gray-300 hover:text-white hover:bg-white/8 border-white/10 hover:border-white/20'
+                    ? 'text-white'
+                    : 'text-gray-300 hover:text-white'
                 }`}
                 whileHover={{ y: -1 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <span>More</span>
-                <ChevronDown className={`w-4 h-4 transition-all duration-300 ${isNavigationOpen ? 'rotate-180 text-green-400' : 'group-hover:text-green-400'}`} />
+                <span className="relative z-10">More</span>
+                <ChevronDown className={`w-4 h-4 transition-all duration-300 ${isNavigationOpen ? 'rotate-180' : ''}`} />
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-blue-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  layoutId="moreHover"
+                />
               </motion.button>
 
               {/* Compact Dropdown Menu */}
@@ -244,14 +249,18 @@ const Header: React.FC = () => {
             {/* Sign In Button */}
             <motion.button
               onClick={() => setIsSignInModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 hover:border-green-400/30 text-gray-300 hover:text-white transition-all duration-300 hover:bg-gradient-to-r hover:from-green-400/10 hover:to-blue-500/10 group"
+              className="relative flex items-center gap-2 px-4 py-2.5 rounded-xl text-gray-300 hover:text-white transition-all duration-300 hover:bg-white/8 group font-medium"
               whileHover={{ y: -1 }}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
             >
-              <LogIn className="w-4 h-4 group-hover:text-green-400 transition-colors duration-200" />
-              <span className="font-medium">Sign In</span>
+              <LogIn className="w-4 h-4 relative z-10" />
+              <span className="relative z-10">Sign In</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-blue-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                layoutId="signInHover"
+              />
             </motion.button>
 
           </div>
@@ -352,121 +361,11 @@ const Header: React.FC = () => {
       </AnimatePresence>
 
       {/* Sign In Modal */}
-      <AnimatePresence>
-        {isSignInModalOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100]"
-              onClick={() => setIsSignInModalOpen(false)}
-            />
-
-            {/* Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed inset-0 flex items-center justify-center z-[101] p-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="bg-black/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 max-w-md w-full shadow-2xl">
-                {/* Close Button */}
-                <button
-                  onClick={() => setIsSignInModalOpen(false)}
-                  className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 p-2 rounded-lg hover:bg-white/10"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-
-                {/* Modal Content */}
-                <div className="text-center">
-                  {/* Icon */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.2, duration: 0.3 }}
-                    className="mx-auto w-16 h-16 bg-gradient-to-br from-green-400/20 to-blue-500/20 rounded-2xl flex items-center justify-center mb-6"
-                  >
-                    <Sparkles className="w-8 h-8 text-green-400" />
-                  </motion.div>
-
-                  {/* Title */}
-                  <motion.h3
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-2xl font-bold text-white mb-3"
-                  >
-                    Something Amazing is Coming
-                  </motion.h3>
-
-                  {/* Description */}
-                  <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="text-gray-300 mb-6 leading-relaxed"
-                  >
-                    YapMate is currently in <span className="text-green-400 font-semibold">exclusive beta</span> with our amazing community.
-                    Sign-in functionality will be available when we launch publicly.
-                  </motion.p>
-
-                  {/* Features Preview */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="space-y-3 mb-8"
-                  >
-                    <div className="flex items-center gap-3 text-sm text-gray-300">
-                      <Clock className="w-4 h-4 text-blue-400" />
-                      <span>Early access to premium features</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-gray-300">
-                      <Rocket className="w-4 h-4 text-purple-400" />
-                      <span>Priority support & feedback channel</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-gray-300">
-                      <Sparkles className="w-4 h-4 text-green-400" />
-                      <span>Exclusive beta community access</span>
-                    </div>
-                  </motion.div>
-
-                  {/* CTA Button */}
-                  <motion.button
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                    onClick={() => {
-                      setIsSignInModalOpen(false)
-                      window.open('https://discord.gg/Zk73mBPyYD', '_blank')
-                    }}
-                    className="w-full bg-gradient-to-r from-green-400 to-blue-500 text-black font-semibold py-3 px-6 rounded-xl hover:from-green-300 hover:to-blue-400 transition-all duration-200 transform hover:scale-105"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Join Beta Community
-                  </motion.button>
-
-                  {/* Footer Note */}
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.7 }}
-                    className="text-xs text-gray-500 mt-4"
-                  >
-                    Be the first to know when we launch publicly
-                  </motion.p>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      <BetaModal
+        isOpen={isSignInModalOpen}
+        onClose={() => setIsSignInModalOpen(false)}
+        type="signin"
+      />
     </motion.header>
   )
 }

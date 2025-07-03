@@ -7,9 +7,11 @@ import {
   Star, 
   TrendingUp
 } from 'lucide-react'
+import BetaModal from '../ui/BetaModal'
 
 const Pricing: React.FC = () => {
   const [isAnnual, setIsAnnual] = useState(false)
+  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false)
 
   const plans = [
     {
@@ -212,7 +214,7 @@ Looking forward to hearing from you.
 Best regards`)
                 window.open(`mailto:admin@yapmate.xyz?subject=${subject}&body=${body}`, '_self')
               } else {
-                alert('Coming Soon!')
+                setIsPricingModalOpen(true)
               }
             }}
             className={`w-full py-4 px-6 rounded-2xl font-semibold text-lg transition-all duration-300 ${
@@ -255,6 +257,7 @@ Best regards`)
   )
 
   return (
+    <>
     <section id="pricing" className="section-compact">
       <div className="container">
         {/* Section Header - Enhanced */}
@@ -336,6 +339,14 @@ Best regards`)
         </div>
       </div>
     </section>
+
+    {/* Pricing Modal */}
+    <BetaModal
+      isOpen={isPricingModalOpen}
+      onClose={() => setIsPricingModalOpen(false)}
+      type="pricing"
+    />
+    </>
   )
 }
 

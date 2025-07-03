@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Sparkles,
@@ -10,8 +10,10 @@ import {
   ArrowRight,
   CheckCircle
 } from 'lucide-react'
+import BetaModal from '../ui/BetaModal'
 
 const Hero: React.FC = memo(() => {
+  const [isInstallModalOpen, setIsInstallModalOpen] = useState(false)
   const scrollToFeatures = useCallback(() => {
     const element = document.getElementById('features')
     if (element) {
@@ -20,13 +22,7 @@ const Hero: React.FC = memo(() => {
   }, [])
 
   const handleInstallExtension = useCallback(() => {
-    // Create a beautiful modal-style alert for beta messaging
-    const message = `🚀 YapMate is currently in Beta!\n\n📱 Extension will be available soon on Web Store\n\n💬 Join our Discord community for early access and updates!\n\nWould you like to join our Discord now?`
-
-    if (confirm(message)) {
-      // Open Discord in new tab
-      window.open('https://discord.gg/Zk73mBPyYD', '_blank')
-    }
+    setIsInstallModalOpen(true)
   }, [])
 
   return (
@@ -483,6 +479,13 @@ const Hero: React.FC = memo(() => {
 
 
       </div>
+
+      {/* Install Extension Modal */}
+      <BetaModal
+        isOpen={isInstallModalOpen}
+        onClose={() => setIsInstallModalOpen(false)}
+        type="install"
+      />
     </section>
   )
 })
