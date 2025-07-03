@@ -308,24 +308,19 @@ const Header: React.FC = () => {
               </AnimatePresence>
             </div>
 
-            {/* Early Access Button - Completely Separate Container */}
+            {/* Early Access Button - No Animations */}
             <div className="flex-shrink-0">
-              <motion.button
+              <button
                 type="button"
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
                   handleEarlyAccess()
                 }}
-                className="btn-cyber text-sm px-6 py-2 border border-green-400/20 hover:border-green-400/40"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 }}
+                className="btn-cyber text-sm px-6 py-2 border border-green-400/20 hover:border-green-400/40 transition-colors duration-200"
               >
                 Get Early Access
-              </motion.button>
+              </button>
             </div>
           </div>
 
@@ -399,17 +394,12 @@ const Header: React.FC = () => {
                 </div>
               </nav>
 
-              <motion.button
+              <button
                 onClick={handleEarlyAccess}
-                className="btn-cyber text-sm px-6 py-2 w-full mt-6"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
+                className="btn-cyber text-sm px-6 py-2 w-full mt-6 transition-colors duration-200"
               >
                 Get Early Access
-              </motion.button>
+              </button>
             </div>
           </motion.div>
         )}
