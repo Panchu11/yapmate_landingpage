@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, Zap, Brain, Star, MapPin, DollarSign, HelpCircle, Shield } from 'lucide-react'
+import { Menu, X, ChevronDown, Star, MapPin, HelpCircle, Shield } from 'lucide-react'
 import Logo from '../ui/Logo'
 
 const Header: React.FC = () => {
@@ -111,7 +111,6 @@ const Header: React.FC = () => {
       // If element not found and we haven't exceeded retry limit
       if (retryCount < 10) {
         // Force scroll down to trigger lazy loading of all sections
-        const currentScroll = window.pageYOffset
         const documentHeight = document.documentElement.scrollHeight
         const windowHeight = window.innerHeight
 
