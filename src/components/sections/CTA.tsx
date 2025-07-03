@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Sparkles, ArrowRight } from 'lucide-react'
+import BetaModal from '../ui/BetaModal'
 
 const CTA: React.FC = () => {
+  const [isCtaModalOpen, setIsCtaModalOpen] = useState(false)
   return (
+    <>
     <section className="section-compact relative overflow-hidden">
       <div className="container">
         <motion.div
@@ -56,7 +59,7 @@ const CTA: React.FC = () => {
                 viewport={{ once: true }}
               >
                 <motion.button
-                  onClick={() => alert('Coming Soon!')}
+                  onClick={() => setIsCtaModalOpen(true)}
                   className="inline-flex items-center gap-3 px-10 py-4 text-xl font-semibold rounded-2xl bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 shadow-xl hover:shadow-2xl transition-all duration-300 text-white"
                   whileHover={{
                     scale: 1.05,
@@ -98,6 +101,14 @@ const CTA: React.FC = () => {
         </motion.div>
       </div>
     </section>
+
+    {/* CTA Modal */}
+    <BetaModal
+      isOpen={isCtaModalOpen}
+      onClose={() => setIsCtaModalOpen(false)}
+      type="footer"
+    />
+    </>
   )
 }
 
