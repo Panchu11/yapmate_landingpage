@@ -207,10 +207,17 @@ npm run build
 npm run type-check
 ```
 
+**Vercel Configuration Error**
+```
+Error: If `rewrites`, `redirects`, `headers`, `cleanUrls` or `trailingSlash` are used, then `routes` cannot be present.
+```
+✅ **Fixed**: Updated vercel.json to use modern configuration format with `rewrites` instead of deprecated `routes`.
+
 **Deployment Issues**
 - Check build logs in Vercel dashboard
 - Verify all dependencies are in package.json
 - Ensure no environment-specific code
+- Make sure vercel.json uses correct configuration format
 
 ## 📞 Support
 
