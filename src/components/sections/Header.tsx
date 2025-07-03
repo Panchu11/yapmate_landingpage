@@ -279,7 +279,7 @@ const Header: React.FC = () => {
                             <div className="px-4 py-1">
                               <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wide">{category}</h4>
                             </div>
-                            {categoryItems.map((item, index) => (
+                            {categoryItems.map((item) => (
                               <motion.button
                                 key={item.name}
                                 onClick={(e) => {
