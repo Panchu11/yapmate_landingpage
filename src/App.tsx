@@ -1,19 +1,106 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Toaster } from 'react-hot-toast'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
+// Layout Components
+
+// Legal Pages
+const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'))
+const TermsOfService = React.lazy(() => import('./pages/TermsOfService'))
+const CookiePolicy = React.lazy(() => import('./pages/CookiePolicy'))
+const HomePage = React.lazy(() => import('./pages/HomePage'))
+
+// Hooks (temporarily disabled for debugging)
 
 function App() {
+  const [isReady, setIsReady] = useState(false)
+
+  // Analytics tracking hooks (temporarily disabled)
+  // useScrollTracking()
+  // usePerformanceTracking()
+  // useEngagementTracking()
+  // useErrorTracking()
+
+  // Performance monitoring (temporarily disabled)
+  // const { performanceScore, suggestions } = usePerformanceMonitor()
+
+  // Accessibility (temporarily disabled)
+  // const { preferences } = useAccessibility()
+
+  // Performance logging temporarily disabled
+
+  useEffect(() => {
+    // Quick initialization
+    const timer = setTimeout(() => {
+      setIsReady(true)
+    }, 500)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
-    <div className="min-h-screen bg-white">
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold gradient-text mb-4">
-            YapMate Landing Page
-          </h1>
-          <p className="text-gray-600">
-            Project setup complete! Ready to build the landing page.
-          </p>
-        </div>
+    <Router>
+      <div style={{
+        minHeight: '100vh',
+        color: '#ffffff',
+        overflowX: 'hidden',
+        position: 'relative',
+        background: '#0a0a0a'
+      }}>
+        {/* Main Content */}
+        <AnimatePresence>
+          {isReady && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <React.Suspense fallback={
+                <div className="section flex items-center justify-center">
+                  <div className="text-green-400 animate-pulse">Loading...</div>
+                </div>
+              }>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/terms-of-service" element={<TermsOfService />} />
+                  <Route path="/cookie-policy" element={<CookiePolicy />} />
+                </Routes>
+              </React.Suspense>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Toast Notifications */}
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: 'rgba(26, 26, 26, 0.9)',
+              color: '#ffffff',
+              border: '1px solid rgba(0, 255, 136, 0.3)',
+              backdropFilter: 'blur(20px)',
+            },
+            success: {
+              iconTheme: {
+                primary: '#00ff88',
+                secondary: '#0a0a0a',
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: '#ff4444',
+                secondary: '#0a0a0a',
+              },
+            },
+          }}
+        />
+
+        {/* Accessibility Toolbar and Performance Dashboard temporarily disabled */}
       </div>
-    </div>
+    </Router>
   )
 }
 

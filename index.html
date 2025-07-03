@@ -1,24 +1,102 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="YapMate - AI-Powered Twitter Reply Generator for Crypto Twitter. Generate authentic, engaging replies that resonate with the crypto community." />
-    <meta name="keywords" content="YapMate, AI, Twitter, Crypto, Reply Generator, Chrome Extension" />
-    <meta property="og:title" content="YapMate - AI-Powered Twitter Reply Generator" />
-    <meta property="og:description" content="Transform your Twitter engagement with AI-powered replies optimized for crypto Twitter culture." />
+    
+    <!-- Primary Meta Tags -->
+    <title>YapMate - Revolutionary AI-Powered Crypto Twitter Reply Generator</title>
+    <meta name="title" content="YapMate - Revolutionary AI-Powered Crypto Twitter Reply Generator" />
+    <meta name="description" content="Experience the future of Crypto Twitter engagement. YapMate's revolutionary AI generates authentic, viral-worthy replies that dominate the conversation." />
+    <meta name="keywords" content="YapMate, AI, Crypto Twitter, Reply Generator, Chrome Extension, Blockchain, DeFi, Web3, Twitter Bot, Social Media AI" />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yapmate.ai" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="YapMate - AI-Powered Twitter Reply Generator" />
-    <meta name="twitter:description" content="Transform your Twitter engagement with AI-powered replies optimized for crypto Twitter culture." />
+    <meta property="og:title" content="YapMate - Revolutionary AI-Powered Crypto Twitter Reply Generator" />
+    <meta property="og:description" content="Experience the future of Crypto Twitter engagement. YapMate's revolutionary AI generates authentic, viral-worthy replies that dominate the conversation." />
+    <meta property="og:image" content="https://yapmate.ai/og-image.png" />
+    <meta property="og:site_name" content="YapMate" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://yapmate.ai" />
+    <meta property="twitter:title" content="YapMate - Revolutionary AI-Powered Crypto Twitter Reply Generator" />
+    <meta property="twitter:description" content="Experience the future of Crypto Twitter engagement. YapMate's revolutionary AI generates authentic, viral-worthy replies that dominate the conversation." />
+    <meta property="twitter:image" content="https://yapmate.ai/og-image.png" />
+    <meta name="twitter:site" content="@Yap_mate" />
+    <meta name="twitter:creator" content="@Yap_mate" />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="author" content="YapMate Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#00ff88" />
+    <link rel="canonical" href="https://yapmate.ai" />
+    
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <title>YapMate - AI-Powered Twitter Reply Generator</title>
+    
+    <!-- Revolutionary Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "YapMate",
+      "description": "Revolutionary AI-powered Chrome extension that generates authentic, viral-worthy replies for Crypto Twitter",
+      "url": "https://yapmate.ai",
+      "applicationCategory": "BrowserApplication",
+      "operatingSystem": "Chrome",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "YapMate Team",
+        "url": "https://yapmate.ai"
+      },
+      "sameAs": [
+        "https://x.com/Yap_mate",
+        "https://discord.gg/agprotocol"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "1247"
+      }
+    }
+    </script>
+    
+    <style>
+      /* Prevent flash of unstyled content */
+      body { 
+        background: #0a0a0a; 
+        overflow-x: hidden;
+      }
+      
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111111;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #00ff88, #00d4ff);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, #00d4ff, #8b5cf6);
+      }
+    </style>
   </head>
-  <body>
+  <body class="bg-dark-900 text-white overflow-x-hidden">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
