@@ -197,7 +197,7 @@ const Community: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
         >
-          {socialLinks.map((social, index) => (
+          {socialLinks.map((social) => (
             <motion.a
               key={social.name}
               href={social.link}

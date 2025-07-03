@@ -34,7 +34,7 @@ export const usePerformanceMonitor = () => {
         setMetrics(prev => ({
           ...prev,
           loadTime: navigation.loadEventEnd - navigation.loadEventStart,
-          timeToInteractive: navigation.domInteractive - navigation.navigationStart
+          timeToInteractive: navigation.domInteractive - (navigation.fetchStart || 0)
         }))
       }
     }

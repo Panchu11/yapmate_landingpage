@@ -216,7 +216,7 @@ export const trackingEvents = {
   // Demo section
   demoStart: () => analytics.trackDemoInteraction('start'),
   demoComplete: () => analytics.trackDemoInteraction('complete'),
-  toneSelection: (tone: string) => analytics.trackDemoInteraction('tone_select', 0),
+  toneSelection: (_tone: string) => analytics.trackDemoInteraction('tone_select', 0),
   
   // Pricing section
   pricingPlanView: (plan: string) => analytics.trackPricingView(plan),

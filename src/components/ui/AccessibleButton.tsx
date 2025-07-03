@@ -31,6 +31,8 @@ const AccessibleButton = forwardRef<HTMLButtonElement, AccessibleButtonProps>(
       ariaDescribedBy,
       announceOnClick,
       disabled,
+      onAnimationStart,
+      onAnimationEnd,
       ...props
     },
     ref
@@ -89,7 +91,7 @@ const AccessibleButton = forwardRef<HTMLButtonElement, AccessibleButtonProps>(
     const keyboardProps = makeKeyboardAccessible(() => {
       if (!disabled && !loading) {
         const syntheticEvent = {
-          currentTarget: ref?.current || null,
+          currentTarget: (typeof ref === 'object' && ref?.current) || null,
           preventDefault: () => {},
           stopPropagation: () => {},
         } as React.MouseEvent<HTMLButtonElement>

@@ -21,7 +21,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   height,
   className = '',
   placeholder,
-  quality = 85,
+  quality = 85, // eslint-disable-line @typescript-eslint/no-unused-vars
   priority = false,
   onLoad,
   onError

@@ -6,8 +6,6 @@ import {
   Users,
   Zap,
   TrendingUp,
-  CheckCircle,
-  Sparkles,
   Lock
 } from 'lucide-react'
 
@@ -203,7 +201,7 @@ const TrustSignals: React.FC = () => {
           viewport={{ once: true }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
         >
-          {metrics.map((metric, index) => (
+          {metrics.map((metric) => (
             <motion.div
               key={metric.label}
               className={`bg-gradient-to-br ${metric.color}/10 rounded-2xl p-6 border border-white/10 backdrop-blur-sm text-center`}

@@ -197,7 +197,7 @@ export const useEngagementTracking = () => {
   const keyPressCountRef = useRef(0)
 
   useEffect(() => {
-    let engagementTimer: NodeJS.Timeout
+    let engagementTimer: number
 
     const trackEngagement = () => {
       const engagementScore = mouseMovementRef.current + clickCountRef.current * 2 + keyPressCountRef.current * 3

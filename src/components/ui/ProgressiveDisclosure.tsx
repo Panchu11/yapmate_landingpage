@@ -20,7 +20,7 @@ const ProgressiveDisclosure: React.FC<ProgressiveDisclosureProps> = ({
   const [isExpanded, setIsExpanded] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
 
-  const visibleItems = isExpanded ? children : children.slice(0, initialCount)
+  const visibleItems = isExpanded ? children : children.slice(0, initialCount) // eslint-disable-line @typescript-eslint/no-unused-vars
   const hasMoreItems = children.length > initialCount
 
   const handleToggle = () => {

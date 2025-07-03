@@ -2,13 +2,10 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import {
   Star,
-  Twitter,
   TrendingUp,
   Users,
-  MessageCircle,
   Zap,
-  CheckCircle,
-  Sparkles
+  CheckCircle
 } from 'lucide-react'
 
 const Testimonials: React.FC = () => {

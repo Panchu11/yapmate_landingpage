@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useMotionValue, useSpring } from 'framer-motion'
 
 export const useScrollProgress = () => {
