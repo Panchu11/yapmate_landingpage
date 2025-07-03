@@ -18,7 +18,7 @@ const Testimonials: React.FC = () => {
       role: 'Beta Tester',
       followers: 'Early Adopter',
       quote: 'I\'ve been testing YapMate for weeks and it\'s mind-blowing! The AI actually understands crypto slang, memes, and context. My replies went from getting 2-3 likes to consistently hitting 50+ likes. It feels like having a crypto-native copywriter in my pocket.',
-      metrics: 'Beta testing since day 1',
+      metrics: 'Early beta adopter',
       verified: true,
       icon: TrendingUp,
       color: 'from-green-400 to-emerald-500',
@@ -33,7 +33,7 @@ const Testimonials: React.FC = () => {
       role: 'Beta Tester',
       followers: 'Community Member',
       quote: 'This tool is absolutely insane! I used to spend 10-15 minutes crafting the perfect reply, now YapMate generates 3 viral-worthy options in seconds. The AI knows when to be bullish, when to add humor, and when to drop alpha. My engagement rate during beta testing increased by 400%.',
-      metrics: 'Active beta contributor',
+      metrics: 'Active contributor',
       verified: true,
       icon: Users,
       color: 'from-blue-400 to-cyan-500',
@@ -48,7 +48,7 @@ const Testimonials: React.FC = () => {
       role: 'Beta Tester',
       followers: 'Power User',
       quote: 'YapMate is a complete game-changer for crypto Twitter! During beta testing, I\'ve seen my replies get retweeted by major influencers multiple times. The AI understands market sentiment, generates contextually perfect responses, and even adds the right amount of degen energy. This will 100% change how we engage on CT.',
-      metrics: 'Beta feedback champion',
+      metrics: 'Power beta tester',
       verified: true,
       icon: Zap,
       color: 'from-purple-400 to-pink-500',
@@ -120,9 +120,9 @@ const Testimonials: React.FC = () => {
 
           {/* Metrics */}
           <div className="bg-gradient-to-r from-green-400/10 to-blue-500/10 rounded-xl p-3 border border-green-400/20 mt-auto">
-            <div className="flex items-center justify-center gap-2">
-              <TrendingUp className="w-4 h-4 text-green-400" />
-              <span className="text-xs font-medium text-green-400">{testimonial.metrics}</span>
+            <div className="flex items-center justify-center gap-2 px-2">
+              <TrendingUp className="w-4 h-4 text-green-400 flex-shrink-0" />
+              <span className="text-xs font-medium text-green-400 text-center truncate">{testimonial.metrics}</span>
             </div>
             <div className="flex items-center justify-center gap-1 mt-2">
               {Array.from({ length: 5 }).map((_, i) => (
