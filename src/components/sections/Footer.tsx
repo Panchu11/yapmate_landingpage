@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
     social: [
       { name: 'X (Twitter)', href: 'https://x.com/Yap_mate', icon: XIcon, external: true },
       { name: 'Discord', href: 'https://discord.gg/Zk73mBPyYD', icon: DiscordIcon, external: true },
-      { name: 'Email', href: 'mailto:hello@agprotocol.xyz', icon: Mail }
+      { name: 'Email', href: 'mailto:admin@yapmate.xyz', icon: Mail }
     ]
   }
 

@@ -156,7 +156,7 @@ yapmate_landingpage/
 - **📊 Local Development**: http://localhost:3002
 - **💬 YapMate Discord**: https://discord.gg/Zk73mBPyYD
 - **🐦 YapMate Twitter**: [@Yap_mate](https://twitter.com/Yap_mate)
-- **📧 Contact Email**: hello@agprotocol.xyz
+- **📧 Contact Email**: admin@yapmate.xyz
 
 ---
 

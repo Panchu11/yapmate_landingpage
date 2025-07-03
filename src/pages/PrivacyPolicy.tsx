@@ -203,7 +203,7 @@ const PrivacyPolicy: React.FC = () => {
               <div className="text-gray-300">
                 <p className="mb-4">If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
                 <div className="space-y-2">
-                  <p><strong>Email:</strong> <a href="mailto:hello@agprotocol.xyz" className="text-green-400 hover:text-green-300 transition-colors">hello@agprotocol.xyz</a></p>
+                  <p><strong>Email:</strong> <a href="mailto:admin@yapmate.xyz" className="text-green-400 hover:text-green-300 transition-colors">admin@yapmate.xyz</a></p>
                   <p><strong>Subject:</strong> Privacy Policy Inquiry</p>
                 </div>
               </div>

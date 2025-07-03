@@ -210,7 +210,7 @@ Please contact me to discuss:
 Looking forward to hearing from you.
 
 Best regards`)
-                window.open(`mailto:hello@agprotocol.xyz?subject=${subject}&body=${body}`, '_self')
+                window.open(`mailto:admin@yapmate.xyz?subject=${subject}&body=${body}`, '_self')
               } else {
                 alert('Coming Soon!')
               }

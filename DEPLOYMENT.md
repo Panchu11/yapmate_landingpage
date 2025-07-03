@@ -223,7 +223,7 @@ Error: If `rewrites`, `redirects`, `headers`, `cleanUrls` or `trailingSlash` are
 
 - **Repository**: https://github.com/Panchu11/yapmate_landingpage
 - **Issues**: Create GitHub issue for bugs
-- **Contact**: hello@agprotocol.xyz
+- **Contact**: admin@yapmate.xyz
 
 ---
 

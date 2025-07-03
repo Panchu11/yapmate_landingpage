@@ -170,7 +170,7 @@ yapmate_landingpage/
 - **GitHub Repository**: https://github.com/Panchu11/yapmate_landingpage
 - **YapMate Discord**: https://discord.gg/Zk73mBPyYD
 - **YapMate Twitter**: [@Yap_mate](https://twitter.com/Yap_mate)
-- **Contact**: hello@agprotocol.xyz
+- **Contact**: admin@yapmate.xyz
 
 ## 📄 License
 
@@ -178,7 +178,7 @@ This project is proprietary software. All rights reserved.
 
 ## 🤝 Contributing
 
-This is a private project. For inquiries, please contact hello@agprotocol.xyz
+This is a private project. For inquiries, please contact admin@yapmate.xyz
 
 ---
 
